@@ -44,6 +44,11 @@ public class StartQuizSingleCommandProcessor implements MenuSingleCommandProcess
         );
     }
 
+    @Override
+    public MenuOption getProcessedCommandOption() {
+        return startQuizMenuOption;
+    }
+
     private Result doQuiz() {
         var quiz = quizService.getQuiz();
         List<Question> questions = quiz.getQuestions();
@@ -71,10 +76,5 @@ public class StartQuizSingleCommandProcessor implements MenuSingleCommandProcess
             answers.put(question.getId(), answerIdx);
         }
         return answers;
-    }
-
-    @Override
-    public MenuOption getProcessedCommandOption() {
-        return startQuizMenuOption;
     }
 }
