@@ -7,10 +7,7 @@ import ru.otus.homework.dao.QuizDao;
 import ru.otus.homework.dao.QuizDaoImpl;
 import ru.otus.homework.dao.ResultDao;
 import ru.otus.homework.dao.ResultDaoImpl;
-import ru.otus.homework.service.QuizCsvLoader;
-import ru.otus.homework.service.QuizLoader;
-import ru.otus.homework.service.QuizService;
-import ru.otus.homework.service.QuizServiceImpl;
+import ru.otus.homework.service.*;
 
 @Component
 public class QuizServiceConfig {
@@ -19,7 +16,8 @@ public class QuizServiceConfig {
     public QuizService quizTestService() {
         AppSettings settings = new AppSettings(false, 0.6);
         ResultDao resultDao = new ResultDaoImpl();
-        QuizLoader loader = new QuizCsvLoader(settings.resource("world_geography.csv"));
+        QuizParser parser = new QuizParserImpl();
+        QuizLoader loader = new QuizCsvLoader(settings.resource("world_geography.csv"), parser);
         QuizDao quizDao = new QuizDaoImpl(loader);
         return new QuizServiceImpl(quizDao, resultDao, settings);
     }

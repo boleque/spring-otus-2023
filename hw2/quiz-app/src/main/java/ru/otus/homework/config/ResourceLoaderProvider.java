@@ -8,5 +8,4 @@ public interface ResourceLoaderProvider {
     Resource resource(String resourceName);
 
     ResourceLoader resourceLoader();
-
 }
