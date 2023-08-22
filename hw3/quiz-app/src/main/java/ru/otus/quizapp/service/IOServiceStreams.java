@@ -1,43 +1,36 @@
 package ru.otus.quizapp.service;
 
 import org.springframework.stereotype.Service;
-
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
-
+import ru.otus.quizapp.config.IOStreamsProvider;
 
 @Service
 public class IOServiceStreams implements IOService {
 
-    private final PrintStream output;
+    private final IOStreamsProvider ioStreamsProvider;
 
-    private final Scanner input;
-
-    public IOServiceStreams(PrintStream outputStream, InputStream inputStream) {
-        output = outputStream;
-        input = new Scanner(inputStream);
+    public IOServiceStreams(IOStreamsProvider ioStreamsProvider) {
+        this.ioStreamsProvider = ioStreamsProvider;
     }
 
     @Override
     public void outputString(String s) {
-        output.println(s);
+        ioStreamsProvider.outputStream().println(s);
     }
 
     @Override
     public int readInt() {
-        return Integer.parseInt(input.nextLine());
+        return Integer.parseInt(ioStreamsProvider.inputStream().nextLine());
     }
 
     @Override
     public int readIntWithPrompt(String prompt) {
         outputString(prompt);
-        return Integer.parseInt(input.nextLine());
+        return Integer.parseInt(ioStreamsProvider.inputStream().nextLine());
     }
 
     @Override
     public String readStringWithPrompt(String prompt) {
         outputString(prompt);
-        return input.nextLine();
+        return ioStreamsProvider.inputStream().nextLine();
     }
 }

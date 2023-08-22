@@ -22,10 +22,10 @@ public class Converter implements QuiestionConverter, ResultConverter  {
         List<Answer> answers = question.getAnswers();
         return String.format(
                 "%s:\n1. %s\n2. %s\n3. %s",
-                question.getText(),
-                answers.get(0).getText(),
-                answers.get(1).getText(),
-                answers.get(2).getText()
+                localizationService.getMessage(question.getText()),
+                localizationService.getMessage(answers.get(0).getText()),
+                localizationService.getMessage(answers.get(1).getText()),
+                localizationService.getMessage(answers.get(2).getText())
         );
     }
 

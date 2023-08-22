@@ -1,10 +1,11 @@
 package ru.otus.quizapp.service;
 
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.otus.quizapp.config.LocaleProvider;
 
-@Service
+@Component
 public class LocalizationServiceImpl implements LocalizationService {
 
     private final LocaleProvider localeProvider;

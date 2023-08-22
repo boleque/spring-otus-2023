@@ -72,8 +72,8 @@ public class QuizTestConfig {
     }
 
     @Bean
-    public QuizCsvLoader quizCsvLoader(Resource resource, QuizParser parser, LocalizationService localizationService) {
-        return new QuizCsvLoader(resource, parser, localizationService);
+    public QuizCsvLoader quizCsvLoader(Resource resource, QuizParser quizParser, LocalizationService localizationService) {
+        return new QuizCsvLoader(resource, quizParser, localizationService);
     }
 
     @Bean
