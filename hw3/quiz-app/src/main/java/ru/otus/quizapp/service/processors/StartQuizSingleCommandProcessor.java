@@ -10,6 +10,7 @@ import ru.otus.quizapp.service.IOService;
 import ru.otus.quizapp.service.LocalizationService;
 import ru.otus.quizapp.service.QuizService;
 import ru.otus.quizapp.service.menu.MenuOption;
+import ru.otus.quizapp.service.utils.AnswerListUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,6 +74,7 @@ public class StartQuizSingleCommandProcessor implements MenuSingleCommandProcess
         for (Question question : questions) {
             var prompt = converter.convertQuiestionToString(question);
             var answerIdx = ioService.readIntWithPrompt(prompt);
+            AnswerListUtil.checkAnswerNumber(answerIdx, question.getAnswers().size());
             answers.put(question.getId(), answerIdx);
         }
         return answers;

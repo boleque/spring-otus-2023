@@ -2,6 +2,7 @@ package ru.otus.quizapp.applicationrunner;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import ru.otus.quizapp.exceptions.AnswerIndexOutOfBoundsException;
 import ru.otus.quizapp.exceptions.MenuCommandProcessorNotFound;
 import ru.otus.quizapp.exceptions.MenuItemIndexOutOfBoundsException;
 import ru.otus.quizapp.service.ApplicationStopService;
@@ -45,15 +46,8 @@ public class ApplicationRunner implements CommandLineRunner {
             try {
                 var selectedMenuItem = readSelectedOptionNumber();
                 processMenuCommand(selectedMenuItem);
-            } catch (NumberFormatException e) {
-                var msg = localizationService.getMessage("numberFormatException");
-                ioService.outputString(msg);
-            } catch (MenuItemIndexOutOfBoundsException e) {
-                var msg = localizationService.getMessage("menuItemIndexOutOfBoundsException");
-                ioService.outputString(msg);
-            } catch (MenuCommandProcessorNotFound e) {
-                var msg = localizationService.getMessage("menuCommandProcessorNotFound");
-                ioService.outputString(msg);
+            } catch (AnswerIndexOutOfBoundsException | MenuItemIndexOutOfBoundsException | MenuCommandProcessorNotFound e) {
+                ioService.outputString(localizationService.getMessage(e.getMessage()));
             }
         }
     }
