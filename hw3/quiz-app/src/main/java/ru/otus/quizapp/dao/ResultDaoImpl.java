@@ -1,12 +1,13 @@
 package ru.otus.quizapp.dao;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.otus.quizapp.domain.Result;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
+@Component
 public class ResultDaoImpl implements ResultDao {
 
     private final Map<String, Result> results;

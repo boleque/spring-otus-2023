@@ -1,10 +1,10 @@
 package ru.otus.quizapp.dao;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.quizapp.domain.Quiz;
 import ru.otus.quizapp.service.QuizLoader;
 
-@Repository
+@Component
 public class QuizDaoImpl implements QuizDao {
 
     private final QuizLoader quizLoader;
