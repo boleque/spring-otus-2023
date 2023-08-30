@@ -1,0 +1,10 @@
+spring:
+  messages:
+    basename: "i18n/messages"
+    encoding: "UTF-8"
+    fallback-to-system-locale: true
+
+application:
+  locale: ru_RU
+  resource: "world_geography.csv"
+  threshold: 0.8
