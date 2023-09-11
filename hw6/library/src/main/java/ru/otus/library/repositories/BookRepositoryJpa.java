@@ -7,7 +7,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
 import org.springframework.stereotype.Component;
 import ru.otus.library.models.Book;
 
@@ -71,10 +70,7 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery(
-                "delete from Book b where b.id = :id"
-        );
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Optional<Book> optionalBook = getById(id);
+        optionalBook.ifPresent(this::delete);
     }
 }
