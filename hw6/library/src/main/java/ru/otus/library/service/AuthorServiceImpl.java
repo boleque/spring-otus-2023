@@ -18,13 +18,11 @@ public class AuthorServiceImpl implements AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Author> getAll() {
         return authorRepository.getAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Author getById(long id) throws EntityNotFoundException {
         Optional<Author> optionalAuthor = authorRepository.getById(id);

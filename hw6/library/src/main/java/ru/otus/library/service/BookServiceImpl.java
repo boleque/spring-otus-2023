@@ -48,7 +48,6 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Book getById(long id) throws EntityNotFoundException {
         Optional<Book> book = bookRepository.getById(id);
@@ -58,7 +57,6 @@ public class BookServiceImpl implements BookService {
         throw new EntityNotFoundException("Book is not found");
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Book getByTitle(String title) throws EntityNotFoundException {
         Optional<Book> book = bookRepository.getByTitle(title);
@@ -68,7 +66,6 @@ public class BookServiceImpl implements BookService {
         throw new EntityNotFoundException("Book is not found");
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Book> getAll() {
         return bookRepository.getAll();

@@ -19,13 +19,11 @@ public class GenreServiceImpl implements GenreService {
         this.genreRepository = genreRepository;
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Genre> getAll() {
         return genreRepository.getAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Genre getById(long id) throws EntityNotFoundException {
         Optional<Genre> optionalAuthor = genreRepository.getById(id);

@@ -19,7 +19,6 @@ public class CommentServiceImpl implements CommentService {
         this.commentRepository = commentRepository;
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Comment getCommentById(long id) throws EntityNotFoundException {
         Optional<Comment> optionalComment = commentRepository.getCommentById(id);
@@ -29,7 +28,6 @@ public class CommentServiceImpl implements CommentService {
         throw new EntityNotFoundException("Comment is not found");
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Comment> getAllCommentsByBookId(long bookId) {
         return commentRepository.getAllCommentsByBookId(bookId);
