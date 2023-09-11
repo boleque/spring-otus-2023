@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import static ru.otus.library.service.utils.MenuCommandConstants.UPDATE_BOOK_TITLE_KEY;
-import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_TITLE_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_ID_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_ALL_BOOKS_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.DELETE_BOOK_KEY;
@@ -21,11 +20,6 @@ public class MenuOptionConfiguration {
     @Bean
     public MenuOption updateBookTitleMenuOption() {
         return new MenuOption(1, UPDATE_BOOK_TITLE_KEY);
-    }
-
-    @Bean
-    public MenuOption getBookByTitleMenuOption() {
-        return new MenuOption(2, GET_BOOK_BY_TITLE_KEY);
     }
 
     @Bean

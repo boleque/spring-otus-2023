@@ -10,9 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -41,8 +45,13 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    @OneToMany(targetEntity = Comment.class, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "book_id", updatable = false)
+    private List<Comment> comments;
+
     public Book(String title, Author author, Genre genre) {
         this.id = 0;
+        this.author = author;
         this.title = title;
         this.genre = genre;
     }

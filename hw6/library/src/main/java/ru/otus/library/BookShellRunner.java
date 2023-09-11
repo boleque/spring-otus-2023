@@ -10,8 +10,6 @@ import ru.otus.library.service.menu.ShellOptionsRegistry;
 import static ru.otus.library.service.utils.MenuCommandConstants.CREATE_BOOK_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_ALL_BOOKS_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_ALL_BOOKS;
-import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_TITLE_KEY;
-import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_TITLE;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_ID_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_BOOK_BY_ID;
 import static ru.otus.library.service.utils.MenuCommandConstants.UPDATE_BOOK_TITLE;
@@ -19,6 +17,8 @@ import static ru.otus.library.service.utils.MenuCommandConstants.UPDATE_BOOK_TIT
 import static ru.otus.library.service.utils.MenuCommandConstants.DELETE_BOOK;
 import static ru.otus.library.service.utils.MenuCommandConstants.DELETE_BOOK_KEY;
 import static ru.otus.library.service.utils.MenuCommandConstants.CREATE_BOOK;
+import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_BOOK_ID;
+import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_BOOK_ID_KEY;
 
 
 @ShellComponent
@@ -36,11 +36,6 @@ public class BookShellRunner {
     @ShellMethod(value = GET_ALL_BOOKS, key = { GET_ALL_BOOKS_KEY })
     public void getAllBooks() {
         processCommand(GET_ALL_BOOKS_KEY);
-    }
-
-    @ShellMethod(value = GET_BOOK_BY_TITLE, key = { GET_BOOK_BY_TITLE_KEY })
-    public void getBookByTitle() {
-        processCommand(GET_BOOK_BY_TITLE_KEY);
     }
 
     @ShellMethod(value = GET_BOOK_BY_ID, key = { GET_BOOK_BY_ID_KEY })
@@ -61,6 +56,11 @@ public class BookShellRunner {
     @ShellMethod(value = CREATE_BOOK, key = { CREATE_BOOK_KEY })
     public void createBook() {
         processCommand(CREATE_BOOK_KEY);
+    }
+
+    @ShellMethod(value = GET_COMMENT_BY_BOOK_ID, key = { GET_COMMENT_BY_BOOK_ID_KEY })
+    public void getCommentsByBookId() {
+        processCommand(GET_COMMENT_BY_BOOK_ID_KEY);
     }
 
     private void processCommand(String key) {

@@ -12,9 +12,9 @@ public class CommentConverter {
 
     public String convertCommentToString(Comment comment) {
         return String.format(
-                "id: %s;  book title: %s; text: %s",
+                "id: %s;  book id: %s; text: %s",
                 comment.getId(),
-                comment.getBook().getTitle(),
+                comment.getBookId(),
                 comment.getText()
         );
     }

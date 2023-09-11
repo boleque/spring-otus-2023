@@ -5,9 +5,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.library.exceptions.EntityNotFoundException;
 import ru.otus.library.models.Author;
 import ru.otus.library.models.Book;
+import ru.otus.library.models.Comment;
 import ru.otus.library.models.Genre;
 import ru.otus.library.repositories.BookRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,17 +60,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getByTitle(String title) throws EntityNotFoundException {
-        Optional<Book> book = bookRepository.getByTitle(title);
-        if (book.isPresent()) {
-            return book.get();
-        }
-        throw new EntityNotFoundException("Book is not found");
+    public List<Book> getAll() {
+        return bookRepository.getAll();
     }
 
     @Override
-    public List<Book> getAll() {
-        return bookRepository.getAll();
+    @Transactional(readOnly = true)
+    public List<Comment> getAllCommentsByBookId(long id) {
+        Optional<Book> optionalBook = bookRepository.getById(id);
+        return optionalBook.map(book -> book.getComments().stream().toList())
+                .orElse(
+                        Collections.emptyList()
+                );
     }
 
     @Transactional

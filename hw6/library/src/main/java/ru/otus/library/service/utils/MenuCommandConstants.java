@@ -6,10 +6,6 @@ public final class MenuCommandConstants {
 
     public static final String GET_BOOK_BY_ID_KEY = "get-book-by-id";
 
-    public static final String GET_BOOK_BY_TITLE = "get book by title";
-
-    public static final String GET_BOOK_BY_TITLE_KEY = "get-book-by-title";
-
     public static final String UPDATE_BOOK_TITLE = "Update book";
 
     public static final String UPDATE_BOOK_TITLE_KEY = "update-book-title";
@@ -40,7 +36,7 @@ public final class MenuCommandConstants {
 
     public static final String GET_COMMENT_BY_BOOK_ID = "Get comment by book id";
 
-    public static final String GET_COMMENT_BY_BOOK_ID_KEY = "get-comment-by-book-id";
+    public static final String GET_COMMENT_BY_BOOK_ID_KEY = "get-comments-by-book-id";
 
     private MenuCommandConstants() {
 

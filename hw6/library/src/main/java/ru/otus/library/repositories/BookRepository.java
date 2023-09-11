@@ -16,7 +16,5 @@ public interface BookRepository {
 
     Optional<Book> getById(long id) ;
 
-    Optional<Book> getByTitle(String title);
-
     List<Book> getAll();
 }

@@ -9,8 +9,6 @@ import ru.otus.library.service.menu.ShellOptionsRegistry;
 
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_ID;
 import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_ID_KEY;
-import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_BOOK_ID;
-import static ru.otus.library.service.utils.MenuCommandConstants.GET_COMMENT_BY_BOOK_ID_KEY;
 
 
 @ShellComponent
@@ -28,11 +26,6 @@ public class CommentShellRunner {
     @ShellMethod(value = GET_COMMENT_BY_ID, key = { GET_COMMENT_BY_ID_KEY })
     public void getCommentById() {
         processCommand(GET_COMMENT_BY_ID_KEY);
-    }
-
-    @ShellMethod(value = GET_COMMENT_BY_BOOK_ID, key = { GET_COMMENT_BY_BOOK_ID_KEY })
-    public void getCommentsByBookId() {
-        processCommand(GET_COMMENT_BY_BOOK_ID_KEY);
     }
 
     private void processCommand(String key) {

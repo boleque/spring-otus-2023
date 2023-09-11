@@ -10,8 +10,8 @@ import ru.otus.library.models.Book;
 import ru.otus.library.models.Comment;
 import ru.otus.library.models.Genre;
 import ru.otus.library.repositories.BookRepositoryJpa;
-import ru.otus.library.repositories.CommentRepositoryJpa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @DataJpaTest
-@Import({BookRepositoryJpa.class, CommentRepositoryJpa.class})
+@Import({BookRepositoryJpa.class})
 class BookRepositoryJpaTest {
 
     @Autowired
     private BookRepositoryJpa bookRepositoryJpa;
-
-    @Autowired
-    private CommentRepositoryJpa commentRepositoryJpa;
 
     @Autowired
     private TestEntityManager em;
@@ -40,7 +37,7 @@ class BookRepositoryJpaTest {
 
     private static String FIRST_GENRE_NAME = "adventure";
 
-    private static final int FIRST_BOOK_NUMBER_OF_COMMENTS = 2;
+    private static final long NEW_BOOK_ID = 3;
 
     private static String NEW_BOOK_TITLE = "Journey to the Centre of the Earth";
 
@@ -48,21 +45,23 @@ class BookRepositoryJpaTest {
 
     private static final int EXPECTED_NUMBER_OF_BOOKS = 2;
 
-    private static final int EXPECTED_NUMBER_OF_COMMENTS = 0;
 
     @Test
     void shouldCreateNewBook() {
-        assertThat(bookRepositoryJpa.getByTitle(NEW_BOOK_TITLE)).isEmpty();
+        assertThat(bookRepositoryJpa.getById(NEW_BOOK_ID)).isEmpty();
 
         Author author = em.find(Author.class, 1);
         Genre genre = em.find(Genre.class, 1);
+        List<Comment> comments = new ArrayList<>();
         Book savedBook = bookRepositoryJpa.save(
-                new Book(0, NEW_BOOK_TITLE, author, genre)
+                new Book(0, NEW_BOOK_TITLE, author, genre, comments)
         );
 
         Book book = em.find(Book.class, savedBook.getId());
         assertNotNull(book);
         assertThat(book)
+                .matches(s -> s.getId() == NEW_BOOK_ID)
+                .matches(s -> s.getTitle().equals(NEW_BOOK_TITLE))
                 .matches(s -> s.getAuthor() != null)
                 .matches(s -> s.getGenre() != null)
                 .isSameAs(savedBook);
@@ -96,18 +95,6 @@ class BookRepositoryJpaTest {
     }
 
     @Test
-    void shouldReturnBookByTitle() {
-        Optional<Book> optionalBook = bookRepositoryJpa.getByTitle(FIRST_BOOK_TITLE);
-        assertTrue(optionalBook.isPresent());
-        Book book = optionalBook.get();
-        assertThat(book)
-                .matches(b -> b.getId() == FIRST_BOOK_ID)
-                .matches(b -> b.getTitle().equals(FIRST_BOOK_TITLE))
-                .matches(b -> b.getAuthor().getName().equals(FIRST_AUTHOR_NAME))
-                .matches(b -> b.getGenre().getName().equals(FIRST_GENRE_NAME));
-    }
-
-    @Test
     void shouldReturnAllBooks() {
         List<Book> books = bookRepositoryJpa.getAll();
         assertThat(books)
@@ -118,20 +105,9 @@ class BookRepositoryJpaTest {
     @Test
     void shouldDeleteBookById() {
         Book bookToDelete = em.find(Book.class, FIRST_BOOK_ID);
-
         assertNotNull(bookToDelete);
-
-        List<Comment> commentsToDelete = commentRepositoryJpa.getAllCommentsByBookId(FIRST_BOOK_ID);
-        assertThat(commentsToDelete)
-                .isNotNull()
-                .hasSize(FIRST_BOOK_NUMBER_OF_COMMENTS);
-
         bookRepositoryJpa.delete(bookToDelete);
-
         Optional<Book> optionalBook = bookRepositoryJpa.getById(FIRST_BOOK_ID);
         assertFalse(optionalBook.isPresent());
-        List<Comment> comments = commentRepositoryJpa.getAllCommentsByBookId(FIRST_BOOK_ID);
-        assertThat(comments)
-                .hasSize(EXPECTED_NUMBER_OF_COMMENTS);
     }
 }

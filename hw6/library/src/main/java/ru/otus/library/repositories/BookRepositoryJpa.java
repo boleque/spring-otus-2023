@@ -1,12 +1,9 @@
 package ru.otus.library.repositories;
 
-
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.NoResultException;
 import org.springframework.stereotype.Component;
 import ru.otus.library.models.Book;
 
@@ -38,20 +35,6 @@ public class BookRepositoryJpa implements BookRepository {
     @Override
     public Optional<Book> getById(long id) {
         return Optional.ofNullable(em.find(Book.class, id));
-    }
-
-    @Override
-    public Optional<Book> getByTitle(String title) {
-        EntityGraph<?> entityGraph = em.getEntityGraph("book-author-genre-entity-graph");
-        TypedQuery<Book> query = em.createQuery(
-                "select b from Book b where b.title = :title", Book.class);
-        query.setParameter("title", title);
-        query.setHint(FETCH.getKey(), entityGraph);
-        try {
-            return Optional.of(query.getSingleResult());
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
     }
 
     @Override

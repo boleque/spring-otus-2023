@@ -2,6 +2,7 @@ package ru.otus.library.service;
 
 import org.springframework.stereotype.Service;
 import ru.otus.library.models.Book;
+import ru.otus.library.models.Comment;
 
 import java.util.List;
 
@@ -9,16 +10,15 @@ import java.util.List;
 @Service
 public interface BookService {
 
-    public void createBook(String title, long authorId, long genreId);
+    void createBook(String title, long authorId, long genreId);
 
-    public void updateBookTitle(long bookId, String title);
+    void updateBookTitle(long bookId, String title);
 
-    public void deleteById(long bookId);
+    void deleteById(long bookId);
 
-    public Book getById(long id);
+    Book getById(long id);
 
-    public Book getByTitle(String title);
+    List<Book> getAll();
 
-    public List<Book> getAll();
-
+    List<Comment> getAllCommentsByBookId(long id);
 }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.otus.library.converters.CommentConverter;
 import ru.otus.library.exceptions.EntityNotFoundException;
 import ru.otus.library.models.Comment;
-import ru.otus.library.service.CommentService;
+import ru.otus.library.service.BookService;
 import ru.otus.library.service.IOService;
 import ru.otus.library.service.menu.MenuOption;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class GetCommentsByBookIdCommandProcessor implements CommandProcessor {
 
-    private final CommentService commentService;
+    private final BookService bookService;
 
     private final CommentConverter converter;
 
@@ -22,11 +22,11 @@ public class GetCommentsByBookIdCommandProcessor implements CommandProcessor {
     private final MenuOption getCommentByBookIdMenuOption;
 
     public GetCommentsByBookIdCommandProcessor(
-            CommentService commentService,
+            BookService bookService,
             IOService ioService,
             CommentConverter converter,
             MenuOption getCommentByBookIdMenuOption) {
-        this.commentService = commentService;
+        this.bookService = bookService;
         this.ioService = ioService;
         this.converter = converter;
         this.getCommentByBookIdMenuOption = getCommentByBookIdMenuOption;
@@ -36,7 +36,7 @@ public class GetCommentsByBookIdCommandProcessor implements CommandProcessor {
     public void processCommand() {
         long bookId = ioService.readLongWithPrompt("Input book id");
         try {
-            List<Comment> comments = commentService.getAllCommentsByBookId(bookId);
+            List<Comment> comments = bookService.getAllCommentsByBookId(bookId);
             ioService.outputString(converter.convertCommentsToString(comments));
         } catch (EntityNotFoundException ex) {
             ioService.outputString(ex.toString());

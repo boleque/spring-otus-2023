@@ -5,7 +5,6 @@ import ru.otus.library.exceptions.EntityNotFoundException;
 import ru.otus.library.models.Comment;
 import ru.otus.library.repositories.CommentRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -25,10 +24,5 @@ public class CommentServiceImpl implements CommentService {
             return optionalComment.get();
         }
         throw new EntityNotFoundException("Comment is not found");
-    }
-
-    @Override
-    public List<Comment> getAllCommentsByBookId(long bookId) {
-        return commentRepository.getAllCommentsByBookId(bookId);
     }
 }
