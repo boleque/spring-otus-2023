@@ -4,14 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.library.models.Author;
 
 import java.util.List;
 import java.util.Optional;
 
 
-@Repository
+@Component
 @Transactional
 public class AuthorRepositoryJpa implements AuthorRepository {
 
