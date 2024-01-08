@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    networks:
+      - library_network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/library
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+  postgres:
+    image: "postgres:13"
+    container_name: db
+    volumes:
+      - library_data:/var/lib/postgresql
+    networks:
+      - library_network
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=library
+
+networks:
+  library_network:
+    driver: bridge
+
+volumes:
+  library_data:
+    external: true
+

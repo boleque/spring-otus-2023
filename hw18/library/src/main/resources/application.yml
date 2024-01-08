@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+      schema-locations: classpath:schema.sql
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+hystrix.command.getAllBooks.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix.command.getBookById.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix.command.getAllCommentsByBookId.execution.isolation.thread.timeoutInMilliseconds: 5000
+
+hystrix.command.getAllComments.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix.command.getCommentById.execution.isolation.thread.timeoutInMilliseconds: 5000
